@@ -1,0 +1,39 @@
+11. Task for “Puppet introduction”
+
+1. Setup vagrant box and install Puppet Standalone according to first part of Chapter 11.3 of CM courseware document
+
+2. Create your first manifest and try tp apply it to puppet node
+
+package { 'nginx':
+
+ensure=>'installed'
+
+}
+
+notify { 'Nginx is installed.':
+
+}
+
+service { 'nginx':
+
+ensure=>'running'
+
+}
+
+notify { 'Nginx is running.':
+
+}
+
+3. Setup vagrant box and install Puppet master according to second part of Chapter 11.3 of CM courseware document (please use basic boxes without preinstalled puppet client/ master)
+
+4. Connect your existing puppet standalone to puppet master
+
+5. Install ntp module from https://forge.puppetlabs.com/puppetlabs/ntp to puppet master and apply it to puupet-client
+
+Task results
+
+Get familiar Get familiar with Puppet standalone and Puppet master.
+
+Deploy simple configuration
+
+Connect node to puppet master 
