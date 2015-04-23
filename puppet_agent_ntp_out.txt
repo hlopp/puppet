@@ -1,0 +1,111 @@
+[vagrant@epplkraw0095t1 vagrant]$ sudo puppet agent -t                                                                       
+Info: Creating a new SSL key for puppetmaster01.example.com                                                                  
+Info: csr_attributes file loading from /etc/puppet/csr_attributes.yaml                                                       
+Info: Creating a new SSL certificate request for puppetmaster01.example.com                                                  
+Info: Certificate Request fingerprint (SHA256): 2F:42:85:51:80:F8:ED:27:AF:52:5A:9A:41:55:95:E9:3E:B0:4B:67:5D:91:4F:50:90:8B:99:E9:FA:D7:A6:A6                                                                                                           
+Info: Caching certificate for puppetmaster01.example.com                                                                     
+Info: Caching certificate for puppetmaster01.example.com                                                                     
+Info: Retrieving pluginfacts                                                                                                 
+Info: Retrieving plugin                                                                                                      
+Info: Loading facts                                                                                                          
+Error: Could not retrieve catalog from remote server: Error 400 on SERVER: Could not parse for environment production: Syntax error at 'Ntp is ok on $(hostname)'; expected '}' at /etc/puppet/manifests/site.pp:4 on node puppetmaster01.example.com     
+Warning: Not using cache on failed catalog                                                                                   
+Error: Could not retrieve catalog; skipping run                                                                              
+Error: Could not run command from postrun_command: Execution of '/etc/puppet/etckeeper-commit-post' returned 1: Error: Could not execute posix command: No such file or directory - /etc/puppet/etckeeper-commit-post                                     
+[vagrant@epplkraw0095t1 vagrant]$                                                                                            
+[vagrant@epplkraw0095t1 vagrant]$                                                                                            
+[vagrant@epplkraw0095t1 vagrant]$                                                                                            
+[vagrant@epplkraw0095t1 vagrant]$                                                                                            
+[vagrant@epplkraw0095t1 vagrant]$                                                                                            
+[vagrant@epplkraw0095t1 vagrant]$                                                                                            
+[vagrant@epplkraw0095t1 vagrant]$ sudo vi /etc/puppet/puppet.conf 
+[vagrant@epplkraw0095t1 vagrant]$                                 
+[vagrant@epplkraw0095t1 vagrant]$                                 
+[vagrant@epplkraw0095t1 vagrant]$                                 
+[vagrant@epplkraw0095t1 vagrant]$                                 
+[vagrant@epplkraw0095t1 vagrant]$ sudo puppet agent -t
+Info: Retrieving pluginfacts                          
+Info: Retrieving plugin                               
+Info: Loading facts                                   
+Info: Caching catalog for puppetmaster01.example.com  
+Info: Applying configuration version '1429800918'     
+Notice: /Stage[main]/Ntp::Install/Package[ntp]/ensure: created
+Notice: /Stage[main]/Ntp::Config/File[/etc/ntp.conf]/content: 
+--- /etc/ntp.conf       2015-03-09 14:21:08.000000000 +0000   
++++ /tmp/puppet-file20150423-7049-xdmp1d-0      2015-04-23 14:56:08.484951274 +0000
+@@ -1,53 +1,24 @@                                                                  
+-# For more information about this file, see the man pages                         
+-# ntp.conf(5), ntp_acc(5), ntp_auth(5), ntp_clock(5), ntp_misc(5), ntp_mon(5).    
++# ntp.conf: Managed by puppet.                                                    
++#                                                                                 
++# Keep ntpd from panicking in the event of a large clock skew                     
++# when a VM guest is suspended and resumed.                                       
++tinker panic 0                                                                    
+                                                                                   
+-driftfile /var/lib/ntp/drift                                                      
+                                                                                   
+ # Permit time synchronization with our time source, but do not                    
+ # permit the source to query or modify the service on this system.                
+ restrict default kod nomodify notrap nopeer noquery                               
+ restrict -6 default kod nomodify notrap nopeer noquery                            
+-                                                                                  
+-# Permit all access over the loopback interface.  This could                      
+-# be tightened as well, but to do so would effect some of                         
+-# the administrative functions.                                                   
+-restrict 127.0.0.1                                                                
++restrict 127.0.0.1                                                                
+ restrict -6 ::1                                                                   
+                                                                                   
+-# Hosts on local network are less restricted.                                     
+-#restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap                          
+                                                                                   
+-# Use public servers from the pool.ntp.org project.                               
+-# Please consider joining the pool (http://www.pool.ntp.org/join.html).           
+-server 0.centos.pool.ntp.org iburst                                               
+-server 1.centos.pool.ntp.org iburst                                               
+-server 2.centos.pool.ntp.org iburst                                               
+-server 3.centos.pool.ntp.org iburst                                               
+-                                                                                  
+-#broadcast 192.168.1.255 autokey       # broadcast server                         
+-#broadcastclient                       # broadcast client                         
+-#broadcast 224.0.1.1 autokey           # multicast server                         
+-#multicastclient 224.0.1.1             # multicast client                         
+-#manycastserver 239.255.254.254                # manycast server                  
+-#manycastclient 239.255.254.254 autokey # manycast client                         
+-                                                                                  
+-# Enable public key cryptography.                                                 
+-#crypto
+-
+-includefile /etc/ntp/crypto/pw
+-
+-# Key file containing the keys and key identifiers used when operating
+-# with symmetric key cryptography.
+-keys /etc/ntp/keys
+-
+-# Specify the key identifiers which are trusted.
+-#trustedkey 4 8 42
++server 0.centos.pool.ntp.org
++server 1.centos.pool.ntp.org
++server 2.centos.pool.ntp.org
+
+-# Specify the key identifier to use with the ntpdc utility.
+-#requestkey 8
+
+-# Specify the key identifier to use with the ntpq utility.
+-#controlkey 8
++# Driftfile.
++driftfile /var/lib/ntp/drift
++
+
+-# Enable writing of statistics records.
+-#statistics clockstats cryptostats loopstats peerstats
+
+Info: Computing checksum on file /etc/ntp.conf
+Info: /Stage[main]/Ntp::Config/File[/etc/ntp.conf]: Filebucketed /etc/ntp.conf to puppet with sum 7fda24f62b1c7ae951db0f746dc6e0cc
+Notice: /Stage[main]/Ntp::Config/File[/etc/ntp.conf]/content: content changed '{md5}7fda24f62b1c7ae951db0f746dc6e0cc' to '{md5}c9d83653966c1e9b8dfbca77b97ff356'
+Info: Class[Ntp::Config]: Scheduling refresh of Class[Ntp::Service]
+Info: Class[Ntp::Service]: Scheduling refresh of Service[ntp]
+Notice: /Stage[main]/Ntp::Service/Service[ntp]/ensure: ensure changed 'stopped' to 'running'
+Info: /Stage[main]/Ntp::Service/Service[ntp]: Unscheduling refresh on Service[ntp]
+Notice: Finished catalog run in 62.30 seconds
+
