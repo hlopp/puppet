@@ -89,3 +89,49 @@ Info: Applying configuration version '1429876118'
 Notice: /Stage[main]/Main/Node[default]/Mysql::Db[test_db]/Mysql_grant[test_user@localhost/test_db.*]/privileges: privileges changed ['SELECT', 'UPDATE'] to 'ALL'
 Notice: Finished catalog run in 17.43 seconds
 
+****************************************************************
+
+[vagrant@epplkraw0095t1 ~]$ mysql -u test_user -p
+Enter password:                                  
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 45                           
+Server version: 5.1.73 Source distribution               
+
+Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective    
+owners.                                                          
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
+mysql> 
+mysql> 
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| test               |
+| test_db            |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> use test_db;
+Database changed
+mysql>
+
+mysql> show grants
+    -> ;
++------------------------------------------------------------------------------------------------------------------+
+| Grants for test_user@localhost                                                                                   |
++------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'test_user'@'localhost' IDENTIFIED BY PASSWORD '*6C8989366EAF75BB670AD8EA7A7FC1176A95CEF4' |
+| GRANT ALL PRIVILEGES ON `test_db`.* TO 'test_user'@'localhost'                                                   |
++------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+
+
