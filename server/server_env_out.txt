@@ -1,0 +1,17 @@
+[vagrant@epplkraw0095t1 vagrant]$ sudo puppet resource package puppet-server ensure=latest
+package { 'puppet-server':
+  ensure => '3.7.5-1.el6',
+}
+
+[vagrant@epplkraw0095t1 manifests]$ sudo puppet cert list --all    
+##########Puppet.conf contains fields below:
+# [production]
+# manifest = $confdir/manifests/site.pp
+##########
+Warning: Sections other than main, master, agent, user are deprecated in puppet.conf. Please use the directory environments feature to specify environments. (See http://docs.puppetlabs.com/puppet/latest/reference/environments.html)                   
+   (at /usr/lib/ruby/site_ruby/1.8/puppet/settings/config_file.rb:82:in `unique_sections_in')                                
+
+Warning: Setting manifest is deprecated in puppet.conf. See http://links.puppetlabs.com/env-settings-deprecations        
+   (at /usr/lib/ruby/site_ruby/1.8/puppet/settings.rb:1141:in `issue_deprecation_warning')                                                                                            
+
++ "puppetmaster01.example.com" (SHA256) C0:B3:A6:63:9F:46:7F:73:FD:00:C5:7D:92:43:5C:F3:5F:84:3D:02:8E:39:F6:F5:88:8D:6A:4E:46:99:B5:3A                                                                                            
