@@ -7,19 +7,26 @@
 
 
 
-
-[vagrant@epplkraw0095t1 deployments]$ sudo puppet agent -t
-Info: Retrieving pluginfacts                              
-Info: Retrieving plugin                                   
-Info: Loading facts                                       
-Info: Caching catalog for node_dev                        
+[vagrant@epplkraw0095t1 ~]$ sudo puppet agent -t
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Info: Loading facts
+Info: Caching catalog for node_dev
 Warning: The package type's allow_virtual parameter will be changing its
 default value from false to true in a future release. If you do not want to
-allow virtual packages, please explicitly set allow_virtual to false.                                
-   (at /usr/lib/ruby/site_ruby/1.8/puppet/type/package.rb:430:in `default')                                                  
-Info: Applying configuration version '1429998968'                                                                            
-Notice: /Stage[main]/Testweb/File[deploy_war]/ensure: defined content as
-'{md5}1b0b620a376ea2673ac5d2a0de051afd'             
-Notice: /Stage[main]/Testweb/File[deploy_xml]/ensure: defined content as
-'{md5}0ac7cecba4df7f2f83933f0e53a38ebc'             
-Notice: Finished catalog run in 20.18 seconds    
+allow virtual packages, please explicitly set allow_virtual to false.
+   (at /usr/lib/ruby/site_ruby/1.8/puppet/type/package.rb:430:in `default')
+Info: Applying configuration version '1430130312'
+Notice: /Stage[main]/Testweb/Exec[retrieve_application]/returns: executed
+successfully
+Notice: /Stage[main]/Testweb/Exec[dir_tmp]/returns: executed successfully
+Notice: /Stage[main]/Testweb/File[application_downloaded]/mode: mode changed
+'0644' to '0755'
+Notice: /Stage[main]/Testweb/Exec[apps_unzip_testweb]/returns: executed
+successfully
+Notice: /Stage[main]/Jboss::Service/Service[jboss]/ensure: ensure changed
+'stopped' to 'running'
+Info: /Stage[main]/Jboss::Service/Service[jboss]: Unscheduling refresh on
+Service[jboss]
+Notice: Finished catalog run in 118.85 seconds
+
