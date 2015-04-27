@@ -12,13 +12,13 @@ name    => 'wget',
 ensure  => installed,
 }
 
- $apps_name = testweb
+$apps_name = testweb
 
 # $deployment_path = $jboss::real_data_dir 
 
 $deployment_path = '/opt/jboss-as-7.1.1.Final/standalone/deployments'
 
- exec{ 'retrieve_application':
+exec { 'retrieve_application':
   command => "/usr/bin/wget http://www.cumulogic.com/download/Apps/${apps_name}.zip -O /tmp/${apps_name}.zip",
   creates => "/tmp/${apps_name}.zip",
  }
@@ -28,6 +28,7 @@ $deployment_path = '/opt/jboss-as-7.1.1.Final/standalone/deployments'
   mode => 0755,
   path => "/tmp/${apps_name}.zip",
   require => Exec["retrieve_application"],
+  replace => "true",
  }
 
 exec {"dir_tmp":
@@ -51,7 +52,6 @@ file { "deploy_war":
     path => "$deployment_path/$apps_name.war",
     replace => true,
     require => Exec["apps_unzip_$apps_name"],
-
 }
 
 file { "deploy_xml":
@@ -60,9 +60,24 @@ file { "deploy_xml":
     path => "$deployment_path/testweb.xml",
     replace => true,
     require => File["deploy_war"],
+    notify => Service['jboss'],
+
+}
+
+exec {"delete_old_tmp_$apps_name":
+  command => "/bin/rm -rf /tmp/tmp_${apps_name}", 
+  require => File ["deploy_xml"],
+
+}
+
+exec {"delete_old_$apps_name.zip":
+  command => "/bin/rm -rf /tmp/${apps_name}.zip",
+  require => File ["deploy_xml"],
 
 }
 
 
+
 }
+
 
