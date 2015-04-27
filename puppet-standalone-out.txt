@@ -1,0 +1,15 @@
+[1;31mError: Could not parse application options: invalid option: this-is-my-manifest.pp[0m
+[mNotice: Compiled catalog for epplkraw0095t1.budapest.epam.com in environment production in 7.70 seconds[0m
+[mNotice: Nginx is running.[0m
+[mNotice: /Stage[main]/Main/Notify[Nginx is running.]/message: defined 'message' as 'Nginx is running.'[0m
+[mNotice: Nginx is installed.[0m
+[mNotice: /Stage[main]/Main/Notify[Nginx is installed.]/message: defined 'message' as 'Nginx is installed.'[0m
+[mNotice: Finished catalog run in 10.45 seconds[0m
+[mNotice: Compiled catalog for epplkraw0095t1.budapest.epam.com in environment production in 6.60 seconds[0m
+[mNotice: /Stage[main]/Main/Package[nginx]/ensure: created[0m
+[mNotice: Nginx is running.[0m
+[mNotice: /Stage[main]/Main/Notify[Nginx is running.]/message: defined 'message' as 'Nginx is running.'[0m
+[mNotice: Nginx is installed.[0m
+[mNotice: /Stage[main]/Main/Notify[Nginx is installed.]/message: defined 'message' as 'Nginx is installed.'[0m
+[mNotice: /Stage[main]/Main/Service[nginx]/ensure: ensure changed 'stopped' to 'running'[0m
+[mNotice: Finished catalog run in 181.37 seconds[0m
