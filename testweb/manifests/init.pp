@@ -1,6 +1,6 @@
 class testweb  {
 
-include jboss
+#include jboss
 
 package { 'install_unzip':
 name	=> 'unzip',
@@ -10,6 +10,12 @@ ensure	=> installed,
 package { 'install_wget':
 name    => 'wget',
 ensure  => installed,
+}
+
+package {'java':
+name => 'openjdk-7-jdk',
+ensure => installed,
+
 }
 
 $apps_name = testweb
@@ -46,10 +52,11 @@ exec {"dir_tmp":
 
  }
 
-file { "deploy_war":
+file { "/opt/jboss-as-7.1.1.Final/standalone/deployments/testweb.war":
     source =>"/tmp/tmp_$apps_name/$apps_name/$apps_name.war",
     mode => 0755,
-    path => "$deployment_path/$apps_name.war",
+#    path => "$deployment_path/$apps_name.war",
+    ensure => file,
     replace => "true",
     require => Exec["apps_unzip_$apps_name"],
 }
@@ -64,18 +71,23 @@ file { "deploy_xml":
 
 }
 
+
 exec {"delete_old_tmp_$apps_name":
   command => "/bin/rm -rf /tmp/tmp_${apps_name}", 
-  require => File ["deploy_xml"],
+  require => File["deploy_xml"],
 
 }
 
 exec {"delete_old_$apps_name.zip":
   command => "/bin/rm -rf /tmp/${apps_name}.zip",
-  require => File ["deploy_xml"],
+  require => File["deploy_xml"],
 
 }
 
+
+service {'jboss':
+ensure => running,
+}
 
 
 }
