@@ -1,2 +1,3 @@
-class { 'testweb::java': }
-class {'testweb::jboss':}
+include testweb
+class { testweb:}
+
