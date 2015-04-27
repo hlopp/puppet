@@ -1,0 +1,16 @@
+node 'node_dev'{
+
+include 'java'
+
+class { 'jboss':
+  install  => 'source',
+  version  => '7',
+  bindaddr    => '192.168.33.20',
+}
+
+include 'iptables'
+include 'jboss'
+include 'testweb'
+}
+
+
