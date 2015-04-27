@@ -8,6 +8,7 @@ class { 'jboss':
   bindaddr    => '192.168.33.20',
 }
 
+include 'iptables'
 include 'jboss'
 include 'testweb'
 }
