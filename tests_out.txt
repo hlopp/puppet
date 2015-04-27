@@ -1,0 +1,30 @@
+nadine-Satellite-A300 testweb # rake spec
+/usr/local/rvm/rubies/ruby-2.2.1/bin/ruby -I/usr/local/rvm/gems/ruby-2.2.1/gems/rspec-support-3.2.2/lib:/usr/local/rvm/gems/ruby-2.2.1/gems/rspec-core-3.2.3/lib /usr/local/rvm/gems/ruby-2.2.1/gems/rspec-core-3.2.3/exe/rspec --pattern spec/\{classes,defines,unit,functions,hosts,integration\}/\*\*/\*_spec.rb --color
+F..
+
+Failures:
+
+  1) testweb should contain File[/opt/jboss-as-7.1.1.Final/standalone/deployments/testweb.war] with ensure => "present" and mode => "0755"
+     Failure/Error: should contain_file('/opt/jboss-as-7.1.1.Final/standalone/deployments/testweb.war').with({
+       expected that the catalogue would contain File[/opt/jboss-as-7.1.1.Final/standalone/deployments/testweb.war] with ensure set to "present" but it is set to "file", and parameter mode set to "0755" but it is set to 493
+       Diff:
+       
+       @@ -1,4 +1,4 @@
+       -present
+       +file
+        
+       -0755
+       +493
+       
+     # ./spec/classes/testweb_spec.rb:9:in `block (2 levels) in <top (required)>'
+
+Finished in 4.35 seconds (files took 2.11 seconds to load)
+3 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/classes/testweb_spec.rb:8 # testweb should contain File[/opt/jboss-as-7.1.1.Final/standalone/deployments/testweb.war] with ensure => "present" and mode => "0755"
+
+/usr/local/rvm/rubies/ruby-2.2.1/bin/ruby -I/usr/local/rvm/gems/ruby-2.2.1/gems/rspec-support-3.2.2/lib:/usr/local/rvm/gems/ruby-2.2.1/gems/rspec-core-3.2.3/lib /usr/local/rvm/gems/ruby-2.2.1/gems/rspec-core-3.2.3/exe/rspec --pattern spec/\{classes,defines,unit,functions,hosts,integration\}/\*\*/\*_spec.rb --color failed
+nadine-Satellite-A300 testweb # 
+
